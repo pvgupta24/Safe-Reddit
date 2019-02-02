@@ -1,6 +1,7 @@
 #! usr/bin/env python3
 import praw
 import pandas as pd
+import model_output
 # import datetime as dt
 from sys import argv
 import os
@@ -14,7 +15,7 @@ reddit = praw.Reddit(
 )
 
 subreddit = reddit.subreddit('all')
-searchQuery = argv[1]
+searchQuery = "happy"
 
 # topics_dict = {
 #     'title': [], 'score': [], 'id': [],
@@ -37,5 +38,7 @@ for topic in topics:
 
 topics_data = pd.DataFrame(topics_dict)
 topics_data.to_csv(f'{searchQuery}.csv', encoding='utf-8', index=False, quoting=1)
+model_output.predict_output(searchQuery+'.csv')
 
 # print(topics_data.head(20))
+
