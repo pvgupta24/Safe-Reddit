@@ -16,7 +16,7 @@ def scrape_file(input_query):
     )
 
     subreddit = reddit.subreddit('all')
-    searchLimit = 10
+    searchLimit = 50
     # searchQuery = input_query
 
     # topics_dict = {
@@ -26,9 +26,10 @@ def scrape_file(input_query):
 
     topics_dict = { 'id': [], 'comment_text': [] }
     topics = [input_query]
-
+    post_dict = {}
     for topic in topics:
         for post in subreddit.search(topic, limit=searchLimit):
+            post_dict[post.id] = post
             # topics_dict['title'].append(post.title)
             # topics_dict['score'].append(post.score)
             topics_dict['id'].append(post.id)
@@ -47,8 +48,9 @@ def scrape_file(input_query):
     print('anuzenith29')
     for i in censored_ids:
         print(i)
-        sub = reddit.submission(i)
-        censored_posts.append(sub)
+        # sub = reddit.submission(i)
+        # censored_posts.append(sub)
+        censored_posts.append(post_dict[i])
 
     return censored_posts
 # print(topics_data.head(20))
