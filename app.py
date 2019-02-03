@@ -1,9 +1,8 @@
 from flask import Flask, render_template, send_from_directory, request
+from scraper import scraper
 import os
-import scraper
 
 # app = Flask(__name__)
-
 # @app.route('/')
 # def hello_world():
 #     return "Hello Anumeha"
@@ -45,7 +44,12 @@ def send_css(path):
 
 @app.route('/search', methods=['POST'])
 def search():
-    print(request.form)
+    query = request.form['query']
+    print(f'Requested{query}')
+
+    posts = scraper.scrape_file(query)
+    
+    return render_template('post.html', posts=posts)
 
 if __name__ == '__main__':
    app.run(debug=True)

@@ -66,3 +66,4 @@ secret.sh
 # Data
 temp/
 *.csv
+*.pyc
