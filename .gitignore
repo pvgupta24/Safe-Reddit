@@ -64,4 +64,5 @@ typings/
 secret.sh
 
 # Data
+temp/
 *.csv
